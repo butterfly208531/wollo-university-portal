@@ -45,4 +45,9 @@ Route::middleware('jwt.admin')->prefix('admin')->group(function () {
 Route::middleware('jwt.admin:super_admin')->prefix('super-admin')->group(function () {
     Route::get('/admins',          [AdminUserController::class, 'index']);
     Route::post('/admins',         [AdminUserController::class, 'store']);
-    Route::put('/admins/{id}',     [AdminUs
+    Route::put('/admins/{id}',     [AdminUserController::class, 'update']);
+    Route::delete('/admins/{id}',  [AdminUserController::class, 'destroy']);
+
+    Route::get('/settings',        [SystemSettingController::class, 'index']);
+    Route::put('/settings',        [SystemSettingController::class, 'update']);
+});
