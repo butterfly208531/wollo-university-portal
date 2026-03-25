@@ -14,13 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Admins
-        $super = Admin::create([
-            'name'     => 'Super Admin',
-            'email'    => 'super@wu.edu.et',
-            'password' => Hash::make('super123'),
-            'role'     => 'super_admin',
-        ]);
-
         $admin = Admin::create([
             'name'     => 'Admin User',
             'email'    => 'admin@wu.edu.et',
@@ -168,8 +161,8 @@ class DatabaseSeeder extends Seeder
                 'version'     => '1.0',
                 'tags'        => $p['tags'],
                 'status'      => 'published',
-                'created_by'  => $super->id,
-                'updated_by'  => $super->id,
+                'created_by'  => $admin->id,
+                'updated_by'  => $admin->id,
             ]);
         }
 
