@@ -23,7 +23,7 @@ class AdminUserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:admins',
             'password' => 'required|string|min:8',
-            'role'     => 'in:admin,super_admin',
+            'role'     => 'in:admin',
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -41,7 +41,7 @@ class AdminUserController extends Controller
             'name'      => 'sometimes|string|max:255',
             'email'     => 'sometimes|email|unique:admins,email,' . $id,
             'password'  => 'sometimes|string|min:8',
-            'role'      => 'sometimes|in:admin,super_admin',
+            'role'      => 'sometimes|in:admin',
             'is_active' => 'sometimes|boolean',
         ]);
 

@@ -79,7 +79,6 @@ export default function ManageAdmins() {
               <select className="form-select" value={form.role}
                 onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
                 <option value="admin">Admin</option>
-                <option value="super_admin">Super Admin</option>
               </select>
             </div>
             <div className="form-group">

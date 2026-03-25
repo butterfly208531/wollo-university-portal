@@ -57,24 +57,20 @@ export default function App() {
                   <Route path="admin/login" element={<AdminLogin />} />
 
                   {/* Admin routes */}
-                  <Route path="admin" element={<ProtectedRoute roles={['admin','super_admin']} />}>
+                  <Route path="admin" element={<ProtectedRoute roles={['admin']} />}>
                     <Route path="dashboard" element={<AdminDashboard />} />
                     <Route path="policies" element={<ManagePolicies />} />
                     <Route path="policies/new" element={<PolicyForm />} />
                     <Route path="policies/:id/edit" element={<PolicyForm />} />
                     <Route path="policies/:id/versions" element={<VersionHistory />} />
                     <Route path="import" element={<BulkImport />} />
+                    <Route path="audit-logs" element={<AuditLogs />} />
                   </Route>
 
-                  {/* Super Admin routes */}
-                  <Route path="super-admin" element={<ProtectedRoute roles={['super_admin']} />}>
+                  {/* Admin — user & settings management */}
+                  <Route path="super-admin" element={<ProtectedRoute roles={['admin']} />}>
                     <Route path="admins" element={<ManageAdmins />} />
                     <Route path="settings" element={<SystemSettings />} />
-                  </Route>
-
-                  {/* Super Admin only — also under /admin prefix */}
-                  <Route path="admin" element={<ProtectedRoute roles={['super_admin']} />}>
-                    <Route path="audit-logs" element={<AuditLogs />} />
                   </Route>
 
                   <Route path="*" element={<NotFound />} />

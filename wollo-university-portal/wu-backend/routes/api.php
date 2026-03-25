@@ -23,7 +23,7 @@ Route::get('/search/suggest',    [PolicyController::class, 'suggest']);
 // ── Auth ─────────────────────────────────────────────────────────────────────
 Route::post('/admin/login',      [AuthController::class, 'login']);
 
-// ── Admin (any admin role) ────────────────────────────────────────────────────
+// ── Admin (all authenticated admins) ─────────────────────────────────────────
 Route::middleware('jwt.admin')->prefix('admin')->group(function () {
     Route::post('/logout',                              [AuthController::class, 'logout']);
     Route::post('/refresh',                             [AuthController::class, 'refresh']);
@@ -41,8 +41,8 @@ Route::middleware('jwt.admin')->prefix('admin')->group(function () {
     Route::get('/audit-logs',                           [AuditLogController::class, 'index']);
 });
 
-// ── Super Admin only ──────────────────────────────────────────────────────────
-Route::middleware('jwt.admin:super_admin')->prefix('super-admin')->group(function () {
+// ── Admin — user & settings management ───────────────────────────────────────
+Route::middleware('jwt.admin')->prefix('super-admin')->group(function () {
     Route::get('/admins',          [AdminUserController::class, 'index']);
     Route::post('/admins',         [AdminUserController::class, 'store']);
     Route::put('/admins/{id}',     [AdminUserController::class, 'update']);

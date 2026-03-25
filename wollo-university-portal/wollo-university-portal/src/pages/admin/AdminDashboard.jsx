@@ -7,7 +7,7 @@ import { getAdminPolicies, getCategories, getAnalytics } from '../../services/ap
 
 export default function AdminDashboard() {
   const { t } = useTranslation();
-  const { user, isSuperAdmin } = useAuth();
+  const { user } = useAuth();
   const [recentPolicies, setRecentPolicies] = useState([]);
   const [policyCount, setPolicyCount] = useState('-');
   const [categoryCount, setCategoryCount] = useState('-');
@@ -24,18 +24,16 @@ export default function AdminDashboard() {
     { icon: <BookOpen size={24} />, label: t('admin.totalPolicies'), value: policyCount, color: 'blue' },
     { icon: <FolderOpen size={24} />, label: t('admin.totalCategories'), value: categoryCount, color: 'green' },
     { icon: <Activity size={24} />, label: 'Recent Updates', value: recentPolicies.length, color: 'orange' },
-    { icon: <Users size={24} />, label: 'Admin Users', value: isSuperAdmin ? '2' : '-', color: 'purple' },
+    { icon: <Users size={24} />, label: 'Admin Users', value: '-', color: 'purple' },
   ];
 
   const quickActions = [
     { icon: <Plus size={18} />, label: t('admin.createPolicy'), to: '/admin/policies/new', color: 'blue' },
     { icon: <FileText size={18} />, label: 'Manage Policies', to: '/admin/policies', color: 'green' },
     { icon: <Upload size={18} />, label: t('admin.importPolicies'), to: '/admin/import', color: 'teal' },
-    ...(isSuperAdmin ? [
-      { icon: <Activity size={18} />, label: t('admin.auditLogs'), to: '/admin/audit-logs', color: 'orange' },
-      { icon: <Users size={18} />, label: t('admin.manageAdmins'), to: '/super-admin/admins', color: 'purple' },
-      { icon: <Settings size={18} />, label: t('admin.systemSettings'), to: '/super-admin/settings', color: 'red' },
-    ] : []),
+    { icon: <Activity size={18} />, label: t('admin.auditLogs'), to: '/admin/audit-logs', color: 'orange' },
+    { icon: <Users size={18} />, label: t('admin.manageAdmins'), to: '/super-admin/admins', color: 'purple' },
+    { icon: <Settings size={18} />, label: t('admin.systemSettings'), to: '/super-admin/settings', color: 'red' },
   ];
 
   return (
